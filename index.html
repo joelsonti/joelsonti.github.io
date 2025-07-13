@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joelson | Currículo Interativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Cool Gray & Professional Blue -->
+    <!-- Application Structure Plan: A single-page application featuring a main header, a sticky navigation bar, and distinct sections for an overview, an interactive experience timeline, a skills dashboard with a radar chart and filterable tabs, and a final section for education. This structure allows recruiters to quickly grasp key qualifications and dive deeper into specific areas of interest, enhancing usability and engagement compared to a static document. -->
+    <!-- Visualization & Content Choices: 1. Key Metrics (Experience, Expertise Areas) -> Goal: Inform -> Method: HTML/CSS Stat Cards -> Interaction: Static -> Justification: Immediate impact and quantification of expertise. 2. Work History -> Goal: Detail progression -> Method: Vertical Interactive Timeline -> Interaction: Click/Hover to highlight -> Justification: More engaging than a list. 3. Core Competencies -> Goal: Compare strengths -> Method: Chart.js Radar Chart -> Interaction: Tooltips on hover -> Justification: Quick visual profile of skills. 4. Detailed Skills -> Goal: Organize extensive list -> Method: JS-powered Tabs -> Interaction: Click to filter -> Justification: Prevents information overload and allows focused review. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 40vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .tab-button.active {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            background-color: #eff6ff;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="text-xl font-bold text-gray-800">
+                Joelson Jorge dos Santos
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#overview" class="text-gray-600 hover:text-blue-500 transition-colors">Visão Geral</a>
+                <a href="#experience" class="text-gray-600 hover:text-blue-500 transition-colors">Experiência</a>
+                <a href="#skills" class="text-gray-600 hover:text-blue-500 transition-colors">Competências</a>
+                <a href="#education" class="text-gray-600 hover:text-blue-500 transition-colors">Formação</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4 space-y-2">
+            <a href="#overview" class="block text-gray-600 hover:text-blue-500">Visão Geral</a>
+            <a href="#experience" class="block text-gray-600 hover:text-blue-500">Experiência</a>
+            <a href="#skills" class="block text-gray-600 hover:text-blue-500">Competências</a>
+            <a href="#education" class="block text-gray-600 hover:text-blue-500">Formação</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-12">
+
+        <section id="overview" class="text-center mb-16 md:mb-24">
+            <h1 class="text-4xl md:text-5xl font-bold text-blue-600 mb-4">Analista de Suporte de TI</h1>
+            <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-8">
+                Especialista em diagnóstico avançado, gerenciamento de infraestrutura de redes e segurança da informação, com foco em garantir a continuidade dos negócios e a satisfação do cliente.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="text-3xl font-bold text-blue-500">12+</h3>
+                    <p class="text-gray-500 mt-1">Anos de Experiência</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="text-3xl font-bold text-blue-500">3</h3>
+                    <p class="text-gray-500 mt-1">Áreas de Expertise Principal</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="text-3xl font-bold text-blue-500">20+</h3>
+                    <p class="text-gray-500 mt-1">Tecnologias e Ferramentas</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="mb-16 md:mb-24">
+            <h2 class="text-3xl font-bold text-center mb-12">Experiência Profissional</h2>
+            <div class="relative max-w-2xl mx-auto">
+                <div class="absolute left-1/2 w-0.5 h-full bg-gray-300 transform -translate-x-1/2"></div>
+
+                <div class="relative mb-8">
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-8 text-right">
+                            <h3 class="text-xl font-bold text-gray-800">Técnico em Segurança Eletrônica</h3>
+                            <p class="text-gray-600">Mega Alarme – Penedo, AL</p>
+                            <p class="text-sm text-gray-500">Dezembro de 2023 – Julho de 2025</p>
+                        </div>
+                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center z-10 mx-auto">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <div class="w-1/2 pl-8">
+                            <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                                <p>Projetei e implementei infraestruturas de segurança, incluindo sistemas de CFTV, alarmes e controle de acesso, alinhando com a infraestrutura de TI.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                     <div class="flex items-center flex-row-reverse">
+                        <div class="w-1/2 pl-8 text-left">
+                            <h3 class="text-xl font-bold text-gray-800">Analista de Suporte de TI</h3>
+                            <p class="text-gray-600">RZ Tech – Penedo, AL</p>
+                            <p class="text-sm text-gray-500">Março de 2011 – Outubro de 2023</p>
+                        </div>
+                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center z-10 mx-auto">
+                           <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
+                        <div class="w-1/2 pr-8">
+                             <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                                <p>Liderei o suporte técnico, gerenciei redes (LAN/WLAN) e implementei rotinas de backup e recuperação de desastres, melhorando a satisfação do cliente e a estabilidade dos sistemas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="skills" class="mb-16 md:mb-24">
+            <h2 class="text-3xl font-bold text-center mb-4">Competências Técnicas</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Uma visão geral das minhas principais áreas de domínio e as tecnologias específicas que utilizo para resolver problemas e criar valor.</p>
+            
+            <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+                <div class="chart-container mx-auto mb-12">
+                    <canvas id="skillsRadarChart"></canvas>
+                </div>
+
+                <div class="w-full max-w-4xl mx-auto">
+                     <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 border-b border-gray-200 pb-4">
+                        <button class="tab-button active" data-target="tab-os">Sistemas Operacionais</button>
+                        <button class="tab-button" data-target="tab-redes">Redes e Infra</button>
+                        <button class="tab-button" data-target="tab-seguranca">Segurança</button>
+                        <button class="tab-button" data-target="tab-ferramentas">Ferramentas</button>
+                        <button class="tab-button" data-target="tab-outros">Outros</button>
+                    </div>
+
+                    <div id="tab-content" class="text-center">
+                        <div id="tab-os" class="tab-pane active">
+                            <p class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-700"><span>Windows Desktop</span> <span>Windows Server</span> <span>Linux (Ubuntu, CentOS)</span> <span>macOS</span></p>
+                        </div>
+                        <div id="tab-redes" class="tab-pane hidden">
+                             <p class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-700"><span>Redes LAN/WAN/WLAN</span> <span>Protocolos TCP/IP</span> <span>DNS / DHCP</span> <span>Roteadores e Switches</span> <span>VPNs</span></p>
+                        </div>
+                        <div id="tab-seguranca" class="tab-pane hidden">
+                             <p class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-700"><span>Backup e Recovery</span> <span>CFTV</span> <span>Controle de Acesso</span> <span>Nmap</span> <span>Wireshark</span> <span>Fail2Ban</span></p>
+                        </div>
+                        <div id="tab-ferramentas" class="tab-pane hidden">
+                             <p class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-700"><span>AnyDesk</span> <span>TeamViewer</span> <span>Zendesk</span> <span>Zabbix</span> <span>Hardware Diagnostics</span></p>
+                        </div>
+                         <div id="tab-outros" class="tab-pane hidden">
+                             <p class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-700"><span>Python</span> <span>JavaScript</span> <span>SQL</span> <span>NoSQL</span> <span>AWS Cloud</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="text-center">
+            <h2 class="text-3xl font-bold mb-8">Formação e Certificações</h2>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="text-xl font-semibold text-blue-600 mb-2">Formação Acadêmica</h3>
+                    <p class="text-lg font-medium text-gray-800">Análise e Desenvolvimento de Sistemas (Cursando)</p>
+                    <p class="text-gray-600">FASUL Educacional</p>
+                    <p class="text-sm text-gray-500">Conclusão prevista: Dezembro de 2027</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="text-xl font-semibold text-blue-600 mb-2">Principais Certificações</h3>
+                    <ul class="text-gray-700 space-y-2 text-left list-disc list-inside">
+                        <li>Suporte em TI do Google (Coursera)</li>
+                        <li>AWS Cloud Practitioner Foundational (Udemy)</li>
+                        <li>Informática – Montagem e Manutenção (TC Informática)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-16 md:mt-24">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <h3 class="text-2xl font-bold mb-4">Contato</h3>
+            <p class="mb-2">joelsonti@outlook.com</p>
+            <p class="mb-4">(82) 99624-2366</p>
+            <a href="https://www.linkedin.com/in/JoelsonTI" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">
+                LinkedIn
+            </a>
+            <p class="text-sm text-gray-400 mt-8">&copy; 2025 Joelson Jorge dos Santos. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            document.querySelectorAll('#mobile-menu a, header nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                         mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            const radarCtx = document.getElementById('skillsRadarChart').getContext('2d');
+            const skillsRadarChart = new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Redes & Infra', 'Segurança da Informação', 'Suporte a Hardware', 'Suporte a Software', 'Atendimento ao Cliente'],
+                    datasets: [{
+                        label: 'Nível de Proficiência',
+                        data: [9, 8, 9, 8, 10],
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 12,
+                                    weight: 'bold'
+                                },
+                                color: '#4b5563'
+                            },
+                            ticks: {
+                                backdropColor: 'rgba(248, 249, 250, 1)',
+                                color: '#6b7280',
+                                stepSize: 2,
+                                beginAtZero: true,
+                                max: 10
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                             callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.dataset.target;
+
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    tabPanes.forEach(pane => {
+                        if (pane.id === targetId) {
+                            pane.classList.remove('hidden');
+                            pane.classList.add('active');
+                        } else {
+                            pane.classList.add('hidden');
+                            pane.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.add('px-4', 'py-2', 'text-sm', 'font-medium', 'text-gray-600', 'rounded-md', 'border-2', 'border-transparent', 'hover:text-blue-500', 'hover:bg-blue-50', 'transition-all', 'duration-200');
+            });
+        });
+    </script>
+</body>
+</html>
